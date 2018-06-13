@@ -77,7 +77,7 @@ var Footer = {
     },
     getData: function () {
         var _this = this;
-        $.getJSON('http://api.jirengu.com/fm/getChannels.php')
+        $.getJSON('https://jirenguapi.applinzi.com/fm/getChannels.php')
             .done(function (ret) {
                 // console.log(ret);
                 _this.render(ret.channels);

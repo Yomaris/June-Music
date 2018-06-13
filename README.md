@@ -1,7 +1,7 @@
 # June-Music音乐电台
 
-####预览链接
-[六月音](http://www.google.com/)
+#### 预览链接
+[六月音](https://yomaris.github.io/June-Music/june-music.html/)
 
 ### 项目功能介绍
 
