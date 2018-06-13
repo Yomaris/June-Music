@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="never">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>June-music</title>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body,
+        section {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font: 14px/1.5 cursive;
+            color: #fff;
+        }
+
+        clearfix::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .layout {
+            margin: 0 auto;
+            width: 600px;
+        }
+
+        main {
+            padding-top: 12vh;
+            height: calc(100% - 24vh);
+
+        }
+
+        @media (min-width: 700px) {
+            .layout {
+                width: 600px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .layout {
+                width: 800px;
+            }
+        }
+
+        @media (min-width: 1000px) {
+            .layout {
+                width: 900px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .layout {
+                width: 1100px;
+            }
+        }
+
+        #page-cover {
+            display: none;
+        }
+
+        .bg {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            /* background: url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-big) center center no-repeat; */
+            /* background-color: rgb(161, 132, 77); */
+            z-index: -1;
+            filter: blur(4px) brightness(60%);
+            background: #003973;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #E5E5BE, #003973);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #E5E5BE, #003973);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        footer {
+            height: 24vh;
+        }
+
+        .layout .aside {
+            float: left;
+        }
+
+        .layout .aside figure {
+            width: 46vh;
+            height: 46vh;
+            padding-top: 10vh;
+            font-size: 30vh;
+            /* background: center center url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-middle); */
+        }
+
+        .aside .actions {
+            display: flex;
+            margin-top: 5vh;
+        }
+
+        .aside .fa {
+            flex: 1;
+            text-align: center;
+            font-size: 5vh;
+            color: rgba(225, 225, 225, .4);
+            transition: color 0.4s;
+            cursor: pointer;
+        }
+
+        .aside .fa:hover {
+            color: #fff;
+        }
+
+        .aside .fa-heart:active {
+            color: red;
+        }
+
+        .layout .detail {
+            margin-left: 56vh;
+        }
+
+        .song-list {
+            font-size: 2vh;
+            padding: .4em .8em;
+            border:1px solid #ccc;
+            text-align: center;
+            width: 16vh;
+        }
+
+        .detail .sing {
+            /* border: 1px solid #ccc; */
+            margin-top: 4vh;
+            text-align: center;
+            height: 37.4vh;
+            font-size: 3vh;
+        }
+
+        .sing .song-name {
+            font-size: 4vh;
+        }
+
+        .lyric {
+            margin-top: 3vh;
+            color: rgba(225, 225, 225, .8);
+            height: 28vh;
+            overflow: scroll;
+            position: relative
+        }
+
+        .lyric-content {
+            transition: all .5s ease-out;
+        }
+
+        p {
+            height: 5vh;
+            line-height: 5vh;
+        }
+
+        #page-music .highlight {
+            color: red;
+            opacity: 0.8;
+        }
+
+        .progress-bar {
+            display: flex;
+            align-items: center;
+            margin-top: 6vh;
+        }
+
+        .progress {
+            position: relative;
+            height: .8vh;
+            flex: 1;
+            background: rgba(225, 225, 225, .4)
+        }
+
+        .progress-load {
+            position: absolute;
+            height: .8vh;
+            width: 0%;
+            /* transition: width .8s; */
+            background-color: #fff;
+        }
+
+        .time {
+            margin-left: 2vh;
+            font-size: 3vh;
+        }
+
+        footer {
+            height: 24vh;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0px -0.25vh 0.25vh 0.25vh rgba(255, 255, 255, 0.2);
+        }
+
+        footer .layout {
+            position: relative;
+        }
+
+        footer .fa {
+            position: absolute;
+            font-size: 6vh;
+            top: 6.5vh;
+            color: rgba(255, 255, 255, 0.4);
+            opacity: 0;
+            transition: all .4s;
+            cursor: pointer;
+        }
+
+        footer:hover .fa {
+            color: rgba(255, 255, 255, 0.4);
+            opacity: 1;
+        }
+
+        footer .fa:hover {
+            color: #fff;
+        }
+
+        footer .fa-chevron-left {
+            left: -8vh;
+        }
+
+        footer .fa-chevron-right {
+            right: -8vh;
+        }
+
+        footer .box {
+            overflow: hidden;
+            height: 24vh;
+            position: relative;
+        }
+
+        footer .song-lists {
+            list-style: none;
+            position: absolute;
+            left: 0;
+        }
+
+        footer .song-lists li {
+            float: left;
+            margin: 2vh 2vh 0 2vh;
+            width: 20vh;
+            height: 20vh;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        footer li.active {
+            box-shadow: 0 0 0.5vh 0.5vh rgba(255, 255, 255, 0.8);
+        }
+
+        footer .song-lists li:hover {
+            box-shadow: 0 0 0.5vh 0.5vh rgba(255, 255, 255, 0.8);
+        }
+
+        .song-lists .cover {
+            height: 16vh;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        .song-lists h3 {
+            font-size: 2vh;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 1vh;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="page-music">
+        <main class="layout clearfix">
+            <div class="aside">
+                <figure class="fa fa-music">
+                </figure>
+                <div class="actions">
+                    <span class="fa fa-heart"></span>
+                    <span class="btn-play fa fa-play"></span>
+                    <span class="fa fa-step-forward"></span>
+                </div>
+            </div>
+            <div class="detail">
+                <div class="song-list">六月音</div>
+                <div class="sing">
+                    <div class="sing-info">
+                        <h3 class="song-name">Hello，June</h3>
+                        <div class="singer">Yormaris</div>
+                    </div>
+                    <div class="lyric">
+                        <div class="lyric-content">
+                            <!-- <p></p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress">
+                        <div class="progress-load"></div>
+                    </div>
+                    <div class="time">
+                        <span class='curTime'>0:00 /</span>
+                        <span class='totalTime'>0.00</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+        <footer>
+            <div class="layout">
+                <span class="fa fa-chevron-left"></span>
+                <span class="fa fa-chevron-right"></span>
+                <div class="box">
+                    <ul class="song-lists clearfix">
+                        <!-- <li>
+                            <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                            <h3>漫步春天</h3>
+                        </li>
+                        <li>
+                            <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                            <h3>漫步春天</h3>
+                        </li>
+                        <li>
+                            <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                            <h3>漫步春天</h3>
+                        </li>
+                        <li>
+                            <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                            <h3>漫步春天</h3>
+                        </li>
+                        <li>
+                            <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                            <h3>漫步春天</h3>
+                        </li>
+                        <li>
+                            <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                            <h3>漫步春天</h3>
+                        </li>
+                        <li>
+                            <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                            <h3>漫步春天</h3>
+                        </li>
+                        <li>
+                            <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                            <h3>漫步春天</h3>
+                        </li>
+                        <li>
+                            <div class="cover" style="background-image:url(http://cloud.hunger-valley.com/music/public_tuijian_spring.jpg-small)"></div>
+                            <h3>漫步春天</h3>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </section>
+    <section id="page-cover"></section>
+    <div class="bg"></div>
+    <script type="text/javascript" src="june.js"></script>
+</body>
+
+
+</html>
